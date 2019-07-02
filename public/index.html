@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Arduino ft. node js</title>
+	<script src="my_jquery_functions.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+	<link href="style.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<div class="container">
+	<div class="row">
+		<div class="col-sm-12">
+			<h1 id = "heading">ARDUINO FT. NODE JS</h1>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-xs-12 col-sm-6 tengah">
+			<button id="btnLampu" type="button" class="btn btn-primary active" onclick="display('divLampu')">Kontrol Lampu</button>
+		</div>
+		<div class="col-xs-12 col-sm-6 tengah">
+			<button id="btnKunci" type="button" class="btn btn-primary" onclick="display('divKunci')">Kontrol Kunci</button>
+		</div>
+	</div>
+
+	<div class="row">
+		<div id="divLampu" class="col-xs-12 col-sm-12 tengah" style="display: none">
+			<button type="button" class="btn btn-secondary" onclick="loadDoc('/led/on')">On</button>
+			<button type="button" class="btn btn-secondary" onclick="loadDoc('/led/off')">Off</button>
+			<button type="button" class="btn btn-secondary" onclick="loadDoc('/led/blink')">Blink</button>
+			<button type="button" class="btn btn-secondary" onclick="loadDoc('/led/stop')">Stop</button>
+		</div>
+		<div id="divKunci" class="col-xs-12 col-sm-12 tengah" style="display: none">
+			<button type="button" class="btn btn-secondary" onclick="loadDoc('/servo/open')">Buka Kunci</button>
+			<button type="button" class="btn btn-secondary" onclick="loadDoc('/servo/close')">Tutup Kunci</button>
+		</div>
+	</div>
+</div>
+	<script>
+
+		function activeButton()
+		{
+			var btnContainer = document.getElementById("divLampu");
+			var btns = btnContainer.getElementsByClassName("btn");
+			for (var i = 0; i < btns.length; i++) {
+			btns[i].addEventListener("click", function() {
+					var current = document.getElementsByClassName("active");
+					current[0].className = current[0].className.replace(" active", "");
+					this.className += " active";
+				});
+			} 
+
+			var btnContainer = document.getElementById("divKunci");
+			var btns = btnContainer.getElementsByClassName("btn");
+			for (var i = 0; i < btns.length; i++) {
+			btns[i].addEventListener("click", function() {
+					var current = document.getElementsByClassName("active");
+					current[0].className = current[0].className.replace(" active", "");
+					this.className += " active";
+				});
+			} 
+		}
+
+		function display(param) {
+			var y = null
+			if(param=="divLampu")
+			{
+				document.getElementById("btnKunci").classList.remove('active');
+				document.getElementById("btnLampu").classList.add('active');
+				y = document.getElementById("divKunci");
+			}
+			else
+			{
+				document.getElementById("btnLampu").classList.remove('active');
+				document.getElementById("btnKunci").classList.add('active');
+				x = document.getElementById(param);
+				y = document.getElementById('divLampu')
+			}
+			
+			var x = document.getElementById(param);
+			if (x.style.display === "none") {
+				x.style.display = "block";
+				y.style.display = "none";
+			} else {
+				x.style.display = "none";
+				y.style.display = "block";
+			}
+		} 
+	</script>
+</body>
+</html>
