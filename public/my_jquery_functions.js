@@ -1,6 +1,3 @@
-var ipAddress="localhost"
-var port = "8000"
-var rute = 'http://'+ipAddress+":"+port
 function loadDoc(param) {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
@@ -11,6 +8,11 @@ function loadDoc(param) {
     // console.log("cek rute:",rute+param)
     xhttp.open("GET", param, true);
     xhttp.send();
+}
+
+function keProximity()
+{
+  window.location.href = '/proximity.html';
 }
 
 
