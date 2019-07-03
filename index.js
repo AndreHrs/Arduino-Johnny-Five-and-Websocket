@@ -24,6 +24,22 @@ var controller = process.argv[2] || "GP2Y0A02YK0F" //Proximity Sensor
 prox1 = 0
 prox2 = 1
 
+//Websocket Part
+console.log('[System]: Establishing Websocket Connection...')
+io.on('connection', function(socket){
+
+  //Send message and log when a new user connected
+  console.log('[System]: A new user established websocket connection...')
+  io.emit('chat message', {waktu: Date.now(),psn: 'A new user connected'}) //We're sending JSON Object, so we use emit instead of Send
+
+  //Send message and log when user disconnected
+  socket.on('disconnect', function(){
+    console.log('[System]: A user just disconnected')
+    io.emit('chat message', {waktu: Date.now(),psn: 'A user just disconnected'})
+  }) 
+}) 
+//Websocket Part End (Websocket established)
+
 //Board functions
 console.log('[System]: Checking for Board...')
 board.on('ready', function() {
@@ -37,18 +53,13 @@ board.on('ready', function() {
 
     //Send message and log when a new user connected
     console.log('[System]: A new user established websocket connection...')
-    io.emit('chat message', 'A new user connected')
+    io.emit('chat message', {waktu: Date.now(),psn: 'A new user connected'}) //We're sending JSON Object, so we use emit instead of Send
 
     //Send message and log when user disconnected
     socket.on('disconnect', function(){
       console.log('[System]: A user just disconnected')
-      io.emit('chat message', 'A user just disconnected')
+      io.emit('chat message', {waktu: Date.now(),psn: 'A user just disconnected'})
     }) 
-
-    // socket.on('chat message', function(msg){
-    //   console.log('message: ' + msg) 
-    //   io.emit('chat message', msg) 
-    // }) 
   }) 
   //Websocket Part End (Websocket established)
 
@@ -64,7 +75,7 @@ board.on('ready', function() {
     prox2 = this.cm
     if(prox2!=prox1)
     {
-      io.emit('chat message', this.cm)  //Emit the value to websocket
+      io.emit('chat message', {waktu: Date.now(),psn: this.cm}) //Emit the value to websocket
       prox1 = this.cm
     }
     
