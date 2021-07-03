@@ -18,10 +18,6 @@ Anda bisa menggunakan browser untuk:
 - Mengambil data dari IR Proximity Sensor melalui websocket
 
 ## Group Members (Anggota Tim)
-===========================
-STMIK MIKROSKIL 2019
-===========================
-Andre Harsono (16.111.0277)
-Enjelin (16.111.1027)
-Tommy Felix (16.111.3923)
-===========================
+- Andre Harsono (16.111.0277)
+- Enjelin (16.111.1027)
+- Tommy Felix (16.111.3923)
